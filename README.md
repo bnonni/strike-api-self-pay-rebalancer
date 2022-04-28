@@ -22,8 +22,12 @@ and pay them using the lncli.
 This app is nothing fancy. It's not meant to be. It is a very basic way to automate the process of paying
 your Strike wallet from your lightning node in small enough parts / amounts to rebalance your channel.
 
---
+**Contact me with questions / comments**
+- [Telegram](https://t.me/BitcoinBryan)
+- [Twitter](https://twitter.com/BryanNonni)
 
-Contact me with questions of comments
-[Telegram](https://t.me/BitcoinBryan)
-[Twitter](https://twitter.com/BryanNonni)
+**Want a feature?**
+1. Fork the repo
+2. Create a `feature/new-feature-name` branch
+3. Build it!
+4. Submit a PR!
