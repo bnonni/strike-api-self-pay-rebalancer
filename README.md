@@ -23,6 +23,9 @@ This app is nothing fancy. It's not meant to be. It is a very basic way to autom
 your Strike wallet from your lightning node in small enough parts / amounts to rebalance your channel.
 
 --
+
 Contact me with questions of comments
+
 [Telegram](https://t.me/BitcoinBryan)
+
 [Twitter](https://twitter.com/BryanNonni)
