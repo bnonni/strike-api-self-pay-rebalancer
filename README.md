@@ -25,7 +25,5 @@ your Strike wallet from your lightning node in small enough parts / amounts to r
 --
 
 Contact me with questions of comments
-
 [Telegram](https://t.me/BitcoinBryan)
-
 [Twitter](https://twitter.com/BryanNonni)
