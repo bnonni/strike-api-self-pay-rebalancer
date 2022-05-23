@@ -13,10 +13,9 @@ const { lnd } = lnService.authenticatedLndGrpc({
     cert: TLS_CERT,
     macaroon: ADMIN_MACAROON,
     socket: '127.0.0.1:10009',
-  });
-  
+});
 
-const api_call = async (path, method, json) => {
+const apiCall = async (path, method, json) => {
     return await fetch(BASE_URL + path, {
         method: method,
         mode: 'cors',
@@ -31,9 +30,10 @@ const api_call = async (path, method, json) => {
 };
 
 const createInvoices = async (total, multiple, currency, memo) => {
-    let invoices = [];  
+    let invoices = [],
+        quotes = [];
     for (let i = total / multiple; i > 0; i--) {
-        const response = await api_call('/invoices', 'POST', {
+        const response = await apiCall('/invoices', 'POST', {
             amount: { amount: multiple, currency: currency },
             description: memo,
         });
@@ -42,10 +42,28 @@ const createInvoices = async (total, multiple, currency, memo) => {
     }
 
     for (let invoice of invoices) {
-        const response = await api_call(`/invoices/${invoice.invoiceId}/quote`, 'POST');
-        const quote = await response.json()
-        console.log(quote.lnInvoice)
+        const response = await apiCall(
+            `/invoices/${invoice.invoiceId}/quote`,
+            'POST'
+        );
+        const quote = await response.json();
+        quotes.push(quote.lnInvoice);
     }
+    return quotes;
 };
 
-const invoices = createInvoices('1', '1', 'USD', 'rebalance');
+const payInvoices = async (total, multiple, currency, memo) => {
+    let receipts = [];
+    const hashes = await createInvoices(total, multiple, currency, memo);
+    for (let hash of hashes) {
+        const receipt = lnService.pay({ lnd, hash });
+        receipts.push(receipt);
+    }
+    return receipts;
+};
+
+const initializeSelfPayRebalancer = async (total, multiple, currency, memo) => {
+    return await payInvoices(total, multiple, currency, memo);
+};
+
+module.exports = { initializeSelfPayRebalancer }

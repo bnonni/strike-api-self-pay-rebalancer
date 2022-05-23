@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "leverage strike api to auto gen n invoices of m cost based on total t, query each invoice by id, use ln invoice hash and lnd to pay each invoice selecting first outbound as channel to rebalance",
   "main": "index.js",
-  "author": "gcolten",
+  "author": "bnonni",
   "license": "MIT",
   "private": false,
   "type": "module",
